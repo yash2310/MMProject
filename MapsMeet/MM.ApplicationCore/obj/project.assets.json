@@ -1,0 +1,451 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETFramework,Version=v4.6.1": {
+      "Antlr3.Runtime/3.5.1": {
+        "type": "package",
+        "compile": {
+          "lib/net40-client/Antlr3.Runtime.dll": {}
+        },
+        "runtime": {
+          "lib/net40-client/Antlr3.Runtime.dll": {}
+        }
+      },
+      "Iesi.Collections/4.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net461/Iesi.Collections.dll": {}
+        },
+        "runtime": {
+          "lib/net461/Iesi.Collections.dll": {}
+        }
+      },
+      "NHibernate/5.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Antlr3.Runtime": "[3.5.1, 4.0.0)",
+          "Iesi.Collections": "[4.0.0, 5.0.0)",
+          "Remotion.Linq": "[2.1.2, 3.0.0)",
+          "Remotion.Linq.EagerFetching": "[2.1.0, 3.0.0)"
+        },
+        "compile": {
+          "lib/net461/NHibernate.dll": {}
+        },
+        "runtime": {
+          "lib/net461/NHibernate.dll": {}
+        }
+      },
+      "NHibernate.Envers/5.0.3": {
+        "type": "package",
+        "dependencies": {
+          "NHibernate": "[5.0.0, 5.1.0)"
+        },
+        "compile": {
+          "lib/net461/NHibernate.Envers.dll": {}
+        },
+        "runtime": {
+          "lib/net461/NHibernate.Envers.dll": {}
+        }
+      },
+      "Remotion.Linq/2.1.2": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Remotion.Linq.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Remotion.Linq.dll": {}
+        }
+      },
+      "Remotion.Linq.EagerFetching/2.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Remotion.Linq": "2.1.2"
+        },
+        "compile": {
+          "lib/net45/Remotion.Linq.EagerFetching.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Remotion.Linq.EagerFetching.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.6.1/win": {
+      "Antlr3.Runtime/3.5.1": {
+        "type": "package",
+        "compile": {
+          "lib/net40-client/Antlr3.Runtime.dll": {}
+        },
+        "runtime": {
+          "lib/net40-client/Antlr3.Runtime.dll": {}
+        }
+      },
+      "Iesi.Collections/4.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net461/Iesi.Collections.dll": {}
+        },
+        "runtime": {
+          "lib/net461/Iesi.Collections.dll": {}
+        }
+      },
+      "NHibernate/5.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Antlr3.Runtime": "[3.5.1, 4.0.0)",
+          "Iesi.Collections": "[4.0.0, 5.0.0)",
+          "Remotion.Linq": "[2.1.2, 3.0.0)",
+          "Remotion.Linq.EagerFetching": "[2.1.0, 3.0.0)"
+        },
+        "compile": {
+          "lib/net461/NHibernate.dll": {}
+        },
+        "runtime": {
+          "lib/net461/NHibernate.dll": {}
+        }
+      },
+      "NHibernate.Envers/5.0.3": {
+        "type": "package",
+        "dependencies": {
+          "NHibernate": "[5.0.0, 5.1.0)"
+        },
+        "compile": {
+          "lib/net461/NHibernate.Envers.dll": {}
+        },
+        "runtime": {
+          "lib/net461/NHibernate.Envers.dll": {}
+        }
+      },
+      "Remotion.Linq/2.1.2": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Remotion.Linq.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Remotion.Linq.dll": {}
+        }
+      },
+      "Remotion.Linq.EagerFetching/2.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Remotion.Linq": "2.1.2"
+        },
+        "compile": {
+          "lib/net45/Remotion.Linq.EagerFetching.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Remotion.Linq.EagerFetching.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.6.1/win-x64": {
+      "Antlr3.Runtime/3.5.1": {
+        "type": "package",
+        "compile": {
+          "lib/net40-client/Antlr3.Runtime.dll": {}
+        },
+        "runtime": {
+          "lib/net40-client/Antlr3.Runtime.dll": {}
+        }
+      },
+      "Iesi.Collections/4.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net461/Iesi.Collections.dll": {}
+        },
+        "runtime": {
+          "lib/net461/Iesi.Collections.dll": {}
+        }
+      },
+      "NHibernate/5.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Antlr3.Runtime": "[3.5.1, 4.0.0)",
+          "Iesi.Collections": "[4.0.0, 5.0.0)",
+          "Remotion.Linq": "[2.1.2, 3.0.0)",
+          "Remotion.Linq.EagerFetching": "[2.1.0, 3.0.0)"
+        },
+        "compile": {
+          "lib/net461/NHibernate.dll": {}
+        },
+        "runtime": {
+          "lib/net461/NHibernate.dll": {}
+        }
+      },
+      "NHibernate.Envers/5.0.3": {
+        "type": "package",
+        "dependencies": {
+          "NHibernate": "[5.0.0, 5.1.0)"
+        },
+        "compile": {
+          "lib/net461/NHibernate.Envers.dll": {}
+        },
+        "runtime": {
+          "lib/net461/NHibernate.Envers.dll": {}
+        }
+      },
+      "Remotion.Linq/2.1.2": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Remotion.Linq.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Remotion.Linq.dll": {}
+        }
+      },
+      "Remotion.Linq.EagerFetching/2.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Remotion.Linq": "2.1.2"
+        },
+        "compile": {
+          "lib/net45/Remotion.Linq.EagerFetching.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Remotion.Linq.EagerFetching.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.6.1/win-x86": {
+      "Antlr3.Runtime/3.5.1": {
+        "type": "package",
+        "compile": {
+          "lib/net40-client/Antlr3.Runtime.dll": {}
+        },
+        "runtime": {
+          "lib/net40-client/Antlr3.Runtime.dll": {}
+        }
+      },
+      "Iesi.Collections/4.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net461/Iesi.Collections.dll": {}
+        },
+        "runtime": {
+          "lib/net461/Iesi.Collections.dll": {}
+        }
+      },
+      "NHibernate/5.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Antlr3.Runtime": "[3.5.1, 4.0.0)",
+          "Iesi.Collections": "[4.0.0, 5.0.0)",
+          "Remotion.Linq": "[2.1.2, 3.0.0)",
+          "Remotion.Linq.EagerFetching": "[2.1.0, 3.0.0)"
+        },
+        "compile": {
+          "lib/net461/NHibernate.dll": {}
+        },
+        "runtime": {
+          "lib/net461/NHibernate.dll": {}
+        }
+      },
+      "NHibernate.Envers/5.0.3": {
+        "type": "package",
+        "dependencies": {
+          "NHibernate": "[5.0.0, 5.1.0)"
+        },
+        "compile": {
+          "lib/net461/NHibernate.Envers.dll": {}
+        },
+        "runtime": {
+          "lib/net461/NHibernate.Envers.dll": {}
+        }
+      },
+      "Remotion.Linq/2.1.2": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Remotion.Linq.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Remotion.Linq.dll": {}
+        }
+      },
+      "Remotion.Linq.EagerFetching/2.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Remotion.Linq": "2.1.2"
+        },
+        "compile": {
+          "lib/net45/Remotion.Linq.EagerFetching.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Remotion.Linq.EagerFetching.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Antlr3.Runtime/3.5.1": {
+      "sha512": "ZwCEpLCLZXkjzf1lYEixp9hgVlYYk33ACHn6xjFyVhGRi2BpoYQez0qtatbetdylASWYTG+cGz0CGR4z66JM4w==",
+      "type": "package",
+      "path": "antlr3.runtime/3.5.1",
+      "files": [
+        "antlr3.runtime.3.5.1.nupkg.sha512",
+        "antlr3.runtime.nuspec",
+        "lib/net20/Antlr3.Runtime.dll",
+        "lib/net20/Antlr3.Runtime.xml",
+        "lib/net40-client/Antlr3.Runtime.dll",
+        "lib/net40-client/Antlr3.Runtime.xml",
+        "lib/netstandard1.1/Antlr3.Runtime.dll",
+        "lib/netstandard1.1/Antlr3.Runtime.xml",
+        "lib/portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1/Antlr3.Runtime.dll",
+        "lib/portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1/Antlr3.Runtime.xml"
+      ]
+    },
+    "Iesi.Collections/4.0.3": {
+      "sha512": "4H2h56m65u6cuhoR2zaeqSUSlN80Y4K5//CI1witWIbWRD3fl7lMlsW7k+MLfTgFdCGuyX1jBnauPXjDVdqKVw==",
+      "type": "package",
+      "path": "iesi.collections/4.0.3",
+      "files": [
+        "iesi.collections.4.0.3.nupkg.sha512",
+        "iesi.collections.nuspec",
+        "lib/net40/Iesi.Collections.dll",
+        "lib/net40/Iesi.Collections.xml",
+        "lib/net461/Iesi.Collections.dll",
+        "lib/net461/Iesi.Collections.xml",
+        "lib/netstandard1.0/Iesi.Collections.dll",
+        "lib/netstandard1.0/Iesi.Collections.xml",
+        "lib/netstandard1.3/Iesi.Collections.dll",
+        "lib/netstandard1.3/Iesi.Collections.xml"
+      ]
+    },
+    "NHibernate/5.0.0": {
+      "sha512": "GiQgGavUDx5zRev30FKrMRRU+FEK9E4bQWXipu7ORj1JzQqwGdN6yvThxfCZ6ipmZ15kbHfnDaQvt1lWbVVvgg==",
+      "type": "package",
+      "path": "nhibernate/5.0.0",
+      "files": [
+        "ConfigurationTemplates/FireBird.cfg.xml",
+        "ConfigurationTemplates/MSSQL.cfg.xml",
+        "ConfigurationTemplates/MySql.cfg.xml",
+        "ConfigurationTemplates/Oracle.cfg.xml",
+        "ConfigurationTemplates/PostgreSQL.cfg.xml",
+        "ConfigurationTemplates/SQLite.cfg.xml",
+        "ConfigurationTemplates/SqlServerCe32.cfg.xml",
+        "ConfigurationTemplates/SqlServerCe64.cfg.xml",
+        "ConfigurationTemplates/SybaseASE.cfg.xml",
+        "ConfigurationTemplates/SybaseSQLAnywhere.cfg.xml",
+        "NHibernate.license.txt",
+        "NHibernate.readme.html",
+        "NHibernate.releasenotes.txt",
+        "lib/net461/NHibernate.dll",
+        "lib/net461/NHibernate.xml",
+        "nhibernate-configuration.xsd",
+        "nhibernate-mapping.xsd",
+        "nhibernate.5.0.0.nupkg.sha512",
+        "nhibernate.nuspec"
+      ]
+    },
+    "NHibernate.Envers/5.0.3": {
+      "sha512": "fWjEJfWUe/xxCnXsuitTE9jk/TsgYxujiIZNiZf77nbs3daaHbHZT1quNBeZaEVRuC1gXddUiVZbKTTD0O25Jw==",
+      "type": "package",
+      "path": "nhibernate.envers/5.0.3",
+      "files": [
+        "lib/net461/NHibernate.Envers.XML",
+        "lib/net461/NHibernate.Envers.dll",
+        "nhibernate.envers.5.0.3.nupkg.sha512",
+        "nhibernate.envers.nuspec",
+        "readme.txt"
+      ]
+    },
+    "Remotion.Linq/2.1.2": {
+      "sha512": "iEHT2fNOuTxhchbaOks+9Ea4YKvp454T/2mZm7CiUqIbUFl7ruK+2SVSvogkBODdxyk7eCpOAQSsowNxO8kKaw==",
+      "type": "package",
+      "path": "remotion.linq/2.1.2",
+      "files": [
+        "lib/net35/Remotion.Linq.XML",
+        "lib/net35/Remotion.Linq.dll",
+        "lib/net40/Remotion.Linq.XML",
+        "lib/net40/Remotion.Linq.dll",
+        "lib/net45/Remotion.Linq.XML",
+        "lib/net45/Remotion.Linq.dll",
+        "lib/netstandard1.0/Remotion.Linq.dll",
+        "lib/netstandard1.0/Remotion.Linq.xml",
+        "lib/portable-net45+win+wpa81+wp80/Remotion.Linq.dll",
+        "lib/portable-net45+win+wpa81+wp80/Remotion.Linq.xml",
+        "remotion.linq.2.1.2.nupkg.sha512",
+        "remotion.linq.nuspec"
+      ]
+    },
+    "Remotion.Linq.EagerFetching/2.1.0": {
+      "sha512": "6tVDAvNF34Vow8lU54bVArNrMoSeP21+DVyQ10ogEZocYnv34ZTcLqyQxLI8oeOl9y/kbF1jmmztMQL7FxgSTQ==",
+      "type": "package",
+      "path": "remotion.linq.eagerfetching/2.1.0",
+      "files": [
+        "lib/net35/Remotion.Linq.EagerFetching.XML",
+        "lib/net35/Remotion.Linq.EagerFetching.dll",
+        "lib/net40/Remotion.Linq.EagerFetching.XML",
+        "lib/net40/Remotion.Linq.EagerFetching.dll",
+        "lib/net45/Remotion.Linq.EagerFetching.XML",
+        "lib/net45/Remotion.Linq.EagerFetching.dll",
+        "lib/netstandard1.0/Remotion.Linq.EagerFetching.dll",
+        "lib/netstandard1.0/Remotion.Linq.EagerFetching.xml",
+        "lib/portable-net45+win+wpa81+wp80/Remotion.Linq.EagerFetching.dll",
+        "lib/portable-net45+win+wpa81+wp80/Remotion.Linq.EagerFetching.xml",
+        "remotion.linq.eagerfetching.2.1.0.nupkg.sha512",
+        "remotion.linq.eagerfetching.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETFramework,Version=v4.6.1": [
+      "Iesi.Collections >= 4.0.3",
+      "NHibernate.Envers >= 5.0.3"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\DELL\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "E:\\Project\\MMProject\\MapsMeet\\MM.ApplicationCore\\MM.ApplicationCore.csproj",
+      "projectName": "MM.ApplicationCore",
+      "projectPath": "E:\\Project\\MMProject\\MapsMeet\\MM.ApplicationCore\\MM.ApplicationCore.csproj",
+      "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
+      "outputPath": "E:\\Project\\MMProject\\MapsMeet\\MM.ApplicationCore\\obj\\",
+      "projectStyle": "PackageReference",
+      "skipContentFileWrite": true,
+      "configFilePaths": [
+        "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net461"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net461": {
+          "projectReferences": {}
+        }
+      }
+    },
+    "frameworks": {
+      "net461": {
+        "dependencies": {
+          "Iesi.Collections": {
+            "target": "Package",
+            "version": "[4.0.3, )"
+          },
+          "NHibernate.Envers": {
+            "target": "Package",
+            "version": "[5.0.3, )"
+          }
+        }
+      }
+    },
+    "runtimes": {
+      "win": {
+        "#import": []
+      },
+      "win-x64": {
+        "#import": []
+      },
+      "win-x86": {
+        "#import": []
+      }
+    }
+  }
+}

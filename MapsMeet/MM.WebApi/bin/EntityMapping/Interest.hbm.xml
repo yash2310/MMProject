@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="MM.ApplicationCore" namespace="MM.ApplicationCore.Entities">
+  <class name="Interest">
+    <id name="Id">
+      <generator class="native" />
+    </id>
+    <property name="Name" not-null="true" />
+    <property name="CreatedOn" />
+    <property name="UpdatedOn" />
+
+    <bag name="User" table="User_Interest" inverse="true" lazy="true">
+      <key column="interest"/>
+      <many-to-many class="Users" column="user"/>
+    </bag>
+  </class>
+</hibernate-mapping>

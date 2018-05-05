@@ -1,0 +1,2 @@
+E:\Project\MMProject\MapsMeet\MM.Test\obj\Debug\MM.Test.csprojResolveAssemblyReference.cache
+E:\Project\MMProject\MapsMeet\MM.Test\obj\Debug\MM.Test.csproj.CoreCompileInputs.cache
