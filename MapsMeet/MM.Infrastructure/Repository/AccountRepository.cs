@@ -4,6 +4,7 @@ using NHibernate;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace MM.Infrastructure.Repository
 {
@@ -11,13 +12,11 @@ namespace MM.Infrastructure.Repository
     {
         private static ISession _session;
 
-        public static string AddUser(Users item)
+        public static Users AddUser(Users item)
         {
-            string status = "";
+            Users users = new Users();
             try
             {
-                //Type type = typeof(T);
-
                 using (_session = MMDatabaseHelper.Create().Session)
                 {
                     ValidationContext context = new ValidationContext(item, null, null);
@@ -31,22 +30,39 @@ namespace MM.Infrastructure.Repository
 
                     using (var transaction = _session.BeginTransaction())
                     {
-                        //User user= item as User;
-
                         _session.Save(item);
 
                         transaction.Commit();
-                        status = "Success";
+                        users = item;
                     }
                 }
             }
             catch (Exception ex)
             {
                 string message = ex.Message.ToString();
-                status = message;
+                users = null;
             }
 
-            return status;
+            return users;
+        }
+
+        public static Users CheckUser(string token)
+        {
+            Users users = null;
+            try
+            {
+                using (_session = MMDatabaseHelper.Create().Session)
+                {
+                    users = _session.CreateCriteria<Users>().List<Users>().FirstOrDefault(u => u.Token.Equals(token));
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                users = null;
+            }
+
+            return users;
         }
     }
 }

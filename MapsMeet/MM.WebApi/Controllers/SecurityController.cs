@@ -1,4 +1,7 @@
-﻿namespace MM.WebApi.Controllers
+﻿using MM.ApplicationCore.Entities;
+using MM.ApplicationCore.Utilities;
+
+namespace MM.WebApi.Controllers
 {
     #region Namespaces
 
@@ -98,14 +101,25 @@
 
         [HttpPost]
         [Route("user/add")]
-        public string Add([FromBody] User user)
+        public User Add([FromBody] Users user)
         {
-            string status = "";
+            User usr = new User();
+            Users result = new Users();
+
+            if (user.LoginType.Equals("facebook") || user.LoginType.Equals("google"))
+            {
+                user.Token = SecurityManager.Encrypt(user.Token);
+            }
+            else if (user.LoginType.Equals("mobile"))
+            {
+                user.Token = SecurityManager.Encrypt(user.MobileNo);
+            }
+
             try
             {
-               ApplicationCore.Entities.Users userInfo = new ApplicationCore.Entities.Users
-               {
-                    UserId=1,
+                Users userInfo = new Users
+                {
+                    UserId = 1,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     Email = user.Email,
@@ -118,20 +132,36 @@
                     UpdatedOn = user.UpdatedOn
                 };
 
-                status = AccountRepository<ApplicationCore.Entities.Users>.AddUser(userInfo);
+                result = AccountRepository<Users>.CheckUser(userInfo.Token);
+                if (result == null)
+                    result = AccountRepository<Users>.AddUser(userInfo);
 
-                //if (status)
-                //    result = "Success";
-                //else
-                //    result = "Failed";
-
-                return status;
+                if (result == null)
+                {
+                    usr.status = "failed";
+                    usr.message = "Invalid User Info";
+                }
+                else
+                {
+                    usr.status = "success";
+                    usr.message = "";
+                    usr.user_id = result.Token;
+                    usr.name = result.FirstName + " " + result.LastName;
+                    usr.dob = result.DOB;
+                    usr.gender = result.Gender;
+                    usr.mobile = result.MobileNo;
+                    usr.login_type = result.LoginType;
+                    usr.email = result.Email;
+                    usr.profile_pic = result.ImageUrl;
+                }
             }
             catch (Exception ex)
             {
-                status = ex.Message.ToString();
-                return status;
+                Console.WriteLine(ex.Message);
+                usr.status = "failed";
+                usr.message = ex.Message;
             }
+            return usr;
         }
 
         #region  Encrypt Decrypt
@@ -160,93 +190,97 @@
 
         #endregion
 
-        private string createToken(string username, string roleList)
-        {
-            //Set issued at date
-            DateTime issuedAt = DateTime.UtcNow;
-            //set the time when it expires
-            DateTime expires = DateTime.UtcNow.AddDays(30);
+        #region Create Token
+        
+        //private string createToken(string username, string roleList)
+        //{
+        //    //Set issued at date
+        //    DateTime issuedAt = DateTime.UtcNow;
+        //    //set the time when it expires
+        //    DateTime expires = DateTime.UtcNow.AddDays(30);
 
-            var tokenHandler = new JwtSecurityTokenHandler();
+        //    var tokenHandler = new JwtSecurityTokenHandler();
 
-            string roles = roleList;
+        //    string roles = roleList;
 
-            //foreach (var role in roleList)
-            //{
-            //    roles += role + ",";
-            //}
+        //    //foreach (var role in roleList)
+        //    //{
+        //    //    roles += role + ",";
+        //    //}
 
-            //create a identity and add claims to the user which we want to log in
-            ClaimsIdentity claimsIdentity = new ClaimsIdentity(new[]
-            {
-                new Claim(ClaimTypes.Name, username)
-                //new Claim(ClaimTypes.Role,roles.Substring(0,roles.Length-1))
-            });
+        //    //create a identity and add claims to the user which we want to log in
+        //    ClaimsIdentity claimsIdentity = new ClaimsIdentity(new[]
+        //    {
+        //        new Claim(ClaimTypes.Name, username)
+        //        //new Claim(ClaimTypes.Role,roles.Substring(0,roles.Length-1))
+        //    });
 
-            const string sec = "401b09eab3c013d4ca54922bb802bec8fd5318192b0a75f201d8b3727429090fb337591abd3e44453b954555b7a0812e1081c39b740293f765eae731f5a65ed1";
-            var now = DateTime.UtcNow;
-            var securityKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.Default.GetBytes(sec));
-            var signingCredentials = new Microsoft.IdentityModel.Tokens.SigningCredentials(securityKey, Microsoft.IdentityModel.Tokens.SecurityAlgorithms.HmacSha256Signature);
+        //    const string sec = "401b09eab3c013d4ca54922bb802bec8fd5318192b0a75f201d8b3727429090fb337591abd3e44453b954555b7a0812e1081c39b740293f765eae731f5a65ed1";
+        //    var now = DateTime.UtcNow;
+        //    var securityKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.Default.GetBytes(sec));
+        //    var signingCredentials = new Microsoft.IdentityModel.Tokens.SigningCredentials(securityKey, Microsoft.IdentityModel.Tokens.SecurityAlgorithms.HmacSha256Signature);
 
-            //create the jwt
-            var token =
-                (JwtSecurityToken)tokenHandler.CreateJwtSecurityToken(issuer: "http://localhost:65070", audience: "http://localhost:65070",
-                      subject: claimsIdentity, notBefore: issuedAt, expires: expires, signingCredentials: signingCredentials);
-            var tokenString = tokenHandler.WriteToken(token);
+        //    //create the jwt
+        //    var token =
+        //        (JwtSecurityToken)tokenHandler.CreateJwtSecurityToken(issuer: "http://localhost:65070", audience: "http://localhost:65070",
+        //              subject: claimsIdentity, notBefore: issuedAt, expires: expires, signingCredentials: signingCredentials);
+        //    var tokenString = tokenHandler.WriteToken(token);
 
-            return tokenString;
-        }
+        //    return tokenString;
+        //}
 
-    //    private EmployeeData GetEmployee(string userName, string password)
-    //    {
-    //        EmployeeData emp = new EmployeeData();
-    //        Employee employee = AccountRepository.Login(userName);
+        //    private EmployeeData GetEmployee(string userName, string password)
+        //    {
+        //        EmployeeData emp = new EmployeeData();
+        //        Employee employee = AccountRepository.Login(userName);
 
-    //        if (employee != null)
-    //        {
-    //            // check a password
-    //            bool validPassword = BCrypt.Verify(password, employee.Password);
-    //            if (!validPassword)
-    //                return emp = null;
+        //        if (employee != null)
+        //        {
+        //            // check a password
+        //            bool validPassword = BCrypt.Verify(password, employee.Password);
+        //            if (!validPassword)
+        //                return emp = null;
 
-    //            emp.Name = employee.Name;
-    //            emp.EmailId = employee.Email;
-    //            emp.EmployeeId = employee.Id;
-    //            emp.EmployeeNo = employee.EmployeeNo;
-    //            emp.ContactNo = employee.ContactNo;
-    //            emp.ImageUrl = employee.ImageUrl;
-    //            emp.NewUser = employee.NewUser;
+        //            emp.Name = employee.Name;
+        //            emp.EmailId = employee.Email;
+        //            emp.EmployeeId = employee.Id;
+        //            emp.EmployeeNo = employee.EmployeeNo;
+        //            emp.ContactNo = employee.ContactNo;
+        //            emp.ImageUrl = employee.ImageUrl;
+        //            emp.NewUser = employee.NewUser;
 
-	   //         emp.ReportingManager = employee.ReportingManager != null
-		  //          ? new Data {Id = employee.ReportingManager.Id, Name = employee.ReportingManager.Name}
-		  //          : null;
-    //            emp.Department = employee.Department != null
-	   //             ? new Data { Id = employee.Department.Id, Name = employee.Department.Name }
-	   //             : null;
-				//emp.Designation = employee.Designation != null
-				//	? new Data { Id = employee.Designation.Id, Name = employee.Designation.Name }
-				//	: null;
-				//emp.Organization = employee.Organization != null
-				//	? new Data { Id = employee.Organization.Id, Name = employee.Organization.Name }
-				//	: null;
+        //         emp.ReportingManager = employee.ReportingManager != null
+        //          ? new Data {Id = employee.ReportingManager.Id, Name = employee.ReportingManager.Name}
+        //          : null;
+        //            emp.Department = employee.Department != null
+        //             ? new Data { Id = employee.Department.Id, Name = employee.Department.Name }
+        //             : null;
+        //emp.Designation = employee.Designation != null
+        //	? new Data { Id = employee.Designation.Id, Name = employee.Designation.Name }
+        //	: null;
+        //emp.Organization = employee.Organization != null
+        //	? new Data { Id = employee.Organization.Id, Name = employee.Organization.Name }
+        //	: null;
 
-				//List<Data> roles = new List<Data>();
-    //            foreach (var employeeRole in employee.Roles)
-    //            {
-	   //             roles.Add(new Data {Id = employeeRole.Id, Name = employeeRole.Name});
-    //            }
-    //            emp.Roles = roles;
+        //List<Data> roles = new List<Data>();
+        //            foreach (var employeeRole in employee.Roles)
+        //            {
+        //             roles.Add(new Data {Id = employeeRole.Id, Name = employeeRole.Name});
+        //            }
+        //            emp.Roles = roles;
 
-	   //         var currentCycle = MasterRepository.GetCurrentCycle();
+        //         var currentCycle = MasterRepository.GetCurrentCycle();
 
-	   //         emp.ReviewCycle = new Data() {Id = currentCycle.Id, Name = currentCycle.Name};
-    //        }
-    //        else
-    //            emp = null;
+        //         emp.ReviewCycle = new Data() {Id = currentCycle.Id, Name = currentCycle.Name};
+        //        }
+        //        else
+        //            emp = null;
 
-    //        return emp;
-    //    }
+        //        return emp;
+        //    }
 
+        #endregion
+        
         public string DecryptStringAES(string cipherText)
         {
             var keybytes = Encoding.UTF8.GetBytes("7061737323313233");

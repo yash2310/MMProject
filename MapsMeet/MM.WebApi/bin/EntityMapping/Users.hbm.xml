@@ -6,11 +6,11 @@
     </id>
     <property name="FirstName" not-null="true" />
     <property name="LastName" />
-    <property name="Email" not-null="true" />
+    <property name="Email" />
     <property name="Gender" not-null="true" />
     <property name="DOB" not-null="true" />
     <property name="MobileNo" />
-    <property name="Token" />
+    <property name="Token" not-null="true" />
     <property name="LoginType" not-null="true" />
     <property name="ImageUrl"/>
     <property name="CreatedOn" not-null="true" />

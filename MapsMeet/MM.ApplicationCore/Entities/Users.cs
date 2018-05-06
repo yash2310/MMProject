@@ -16,7 +16,6 @@ namespace MM.ApplicationCore.Entities
         [StringLength(30, ErrorMessage = "Last Name should not be more than 30 character")]
         public virtual string LastName { get; set; } // LastName for User
 
-        [Required(ErrorMessage = "Email Required")]
         [DataType(DataType.EmailAddress, ErrorMessage = "Invalid Email")]
         public virtual string Email { get; set; }
 
@@ -28,6 +27,7 @@ namespace MM.ApplicationCore.Entities
 
         public virtual string MobileNo { get; set; }
 
+        [Required(ErrorMessage = "Token Required")]
         public virtual string Token { get; set; }
 
         [Required(ErrorMessage = "Login Type Required")]
