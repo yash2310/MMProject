@@ -105,36 +105,38 @@ namespace MM.WebApi.Controllers
         {
             User usr = new User();
             Users result = new Users();
+            string token = "";
 
             if (user.LoginType.Equals("facebook") || user.LoginType.Equals("google"))
             {
-                user.Token = SecurityManager.Encrypt(user.Token);
+                token = user.Token;
             }
             else if (user.LoginType.Equals("mobile"))
             {
-                user.Token = SecurityManager.Encrypt(user.MobileNo);
+                token = SecurityManager.Encrypt(user.MobileNo);
             }
 
             try
             {
-                Users userInfo = new Users
-                {
-                    UserId = 1,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    Email = user.Email,
-                    Gender = user.Gender,
-                    DOB = user.DOB,
-                    MobileNo = user.MobileNo,
-                    Token = user.Token,
-                    LoginType = user.LoginType,
-                    CreatedOn = user.CreatedOn,
-                    UpdatedOn = user.UpdatedOn
-                };
-
-                result = AccountRepository<Users>.CheckUser(userInfo.Token);
+                result = AccountRepository<Users>.CheckUser(token);
                 if (result == null)
+                {
+                    Users userInfo = new Users
+                    {
+                        UserId = 1,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Email = user.Email,
+                        Gender = user.Gender,
+                        DOB = user.DOB,
+                        MobileNo = user.MobileNo,
+                        Token = token,
+                        LoginType = user.LoginType,
+                        CreatedOn = user.CreatedOn,
+                        UpdatedOn = user.UpdatedOn
+                    };
                     result = AccountRepository<Users>.AddUser(userInfo);
+                }
 
                 if (result == null)
                 {
