@@ -41,76 +41,77 @@ namespace MM.Infrastructure.DatabaseHelper
 
             configuration.AddFile(directoryPath + @"bin\EntityMapping\Users.hbm.xml");
             configuration.AddFile(directoryPath + @"bin\EntityMapping\Interest.hbm.xml");
-            #endregion
+			configuration.AddFile(directoryPath + @"bin\EntityMapping\Location.hbm.xml");
+			#endregion
 
-            #region Envers Configuration For Audit
+			#region Envers Configuration For Audit
 
-            //         var enversConf = new NHibernate.Envers.Configuration.Fluent.FluentConfiguration();
+			//         var enversConf = new NHibernate.Envers.Configuration.Fluent.FluentConfiguration();
 
-            //// RatingLog and NotificationLog Entities are used for logging
-            //enversConf.Audit<Department>()
-            //	.Exclude("CreatedOn")
-            //	.Exclude("CreatedBy")
-            //	.Exclude("Employees");
-            //enversConf.Audit<Designation>()
-            //	.Exclude("CreatedOn")
-            //	.Exclude("CreatedBy")
-            //	.Exclude("DesignationGoals")
-            //	.Exclude("Employees");
-            //enversConf.Audit<Organization>()
-            //	.Exclude("CreatedOn")
-            //	.Exclude("CreatedBy")
-            //	.Exclude("OrganizationGoals")
-            //	.Exclude("Employees");
-            //enversConf.Audit<GoalStatus>()
-            //	.Exclude("CreatedOn")
-            //	.Exclude("CreatedBy");
-            //enversConf.Audit<ReviewCycle>()
-            //	.Exclude("CreatedOn")
-            //	.Exclude("CreatedBy")
-            //	.Exclude("OrganizationGoals")
-            //	.Exclude("DesignationGoals")
-            //	.Exclude("ManagerialEmployeeGoals")
-            //	.Exclude("EmployeeGoals");
-            //enversConf.Audit<RatingStatus>()
-            //	.Exclude("CreatedOn")
-            //	.Exclude("CreatedBy");
-            //enversConf.Audit<Setting>()
-            //	.Exclude("CreatedOn")
-            //	.Exclude("CreatedBy");
-            //enversConf.Audit<Role>()
-            //	.Exclude("CreatedOn")
-            //	.Exclude("CreatedBy");
+			//// RatingLog and NotificationLog Entities are used for logging
+			//enversConf.Audit<Department>()
+			//	.Exclude("CreatedOn")
+			//	.Exclude("CreatedBy")
+			//	.Exclude("Employees");
+			//enversConf.Audit<Designation>()
+			//	.Exclude("CreatedOn")
+			//	.Exclude("CreatedBy")
+			//	.Exclude("DesignationGoals")
+			//	.Exclude("Employees");
+			//enversConf.Audit<Organization>()
+			//	.Exclude("CreatedOn")
+			//	.Exclude("CreatedBy")
+			//	.Exclude("OrganizationGoals")
+			//	.Exclude("Employees");
+			//enversConf.Audit<GoalStatus>()
+			//	.Exclude("CreatedOn")
+			//	.Exclude("CreatedBy");
+			//enversConf.Audit<ReviewCycle>()
+			//	.Exclude("CreatedOn")
+			//	.Exclude("CreatedBy")
+			//	.Exclude("OrganizationGoals")
+			//	.Exclude("DesignationGoals")
+			//	.Exclude("ManagerialEmployeeGoals")
+			//	.Exclude("EmployeeGoals");
+			//enversConf.Audit<RatingStatus>()
+			//	.Exclude("CreatedOn")
+			//	.Exclude("CreatedBy");
+			//enversConf.Audit<Setting>()
+			//	.Exclude("CreatedOn")
+			//	.Exclude("CreatedBy");
+			//enversConf.Audit<Role>()
+			//	.Exclude("CreatedOn")
+			//	.Exclude("CreatedBy");
 
-            //enversConf.Audit<Employee>()
-            //	.Exclude("CreatedOn")
-            //	.Exclude("CreatedBy")
-            //	.Exclude("Roles")
-            //	.Exclude("OrganizationGoals")
-            //	.Exclude("DesignationGoals")
-            //	.Exclude("ManagerialEmployeeGoals")
-            //	.Exclude("EmployeeGoals");
-            //enversConf.Audit<DesignationGoal>()
-            //	.Exclude("CreatedOn")
-            //	.Exclude("CreatedBy");
-            //enversConf.Audit<OrganizationGoal>()
-            //	.Exclude("CreatedOn")
-            //	.Exclude("CreatedBy");
-            //enversConf.Audit<EmployeeGoal>()
-            //	.Exclude("CreatedOn")
-            //	.Exclude("CreatedBy");
-            //enversConf.Audit<ManagerialEmployeeGoal>()
-            //	.Exclude("CreatedOn")
-            //	.Exclude("CreatedBy");
-            //enversConf.Audit<Rating>()
-            //	.Exclude("CreatedOn")
-            //	.Exclude("CreatedBy");
+			//enversConf.Audit<Employee>()
+			//	.Exclude("CreatedOn")
+			//	.Exclude("CreatedBy")
+			//	.Exclude("Roles")
+			//	.Exclude("OrganizationGoals")
+			//	.Exclude("DesignationGoals")
+			//	.Exclude("ManagerialEmployeeGoals")
+			//	.Exclude("EmployeeGoals");
+			//enversConf.Audit<DesignationGoal>()
+			//	.Exclude("CreatedOn")
+			//	.Exclude("CreatedBy");
+			//enversConf.Audit<OrganizationGoal>()
+			//	.Exclude("CreatedOn")
+			//	.Exclude("CreatedBy");
+			//enversConf.Audit<EmployeeGoal>()
+			//	.Exclude("CreatedOn")
+			//	.Exclude("CreatedBy");
+			//enversConf.Audit<ManagerialEmployeeGoal>()
+			//	.Exclude("CreatedOn")
+			//	.Exclude("CreatedBy");
+			//enversConf.Audit<Rating>()
+			//	.Exclude("CreatedOn")
+			//	.Exclude("CreatedBy");
 
-            //configuration.IntegrateWithEnvers(enversConf);
+			//configuration.IntegrateWithEnvers(enversConf);
 
-            #endregion
+			#endregion
 
-            _sessionFactory = configuration.BuildSessionFactory();
+			_sessionFactory = configuration.BuildSessionFactory();
 
 			#region Create/Update Database Schema
 

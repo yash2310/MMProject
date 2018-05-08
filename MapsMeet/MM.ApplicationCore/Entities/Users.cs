@@ -40,6 +40,6 @@ namespace MM.ApplicationCore.Entities
 
         public virtual DateTime? UpdatedOn { get; set; }
 
-        public virtual IList<Interest> Interests { get; set; }
+		public virtual Location Location { get; set; }
     }
 }

@@ -16,9 +16,7 @@
     <property name="CreatedOn" not-null="true" />
     <property name="UpdatedOn" />
     
-    <bag name="Interests" table="User_Interest" inverse="true" lazy="true">
-      <key column="user"/>
-      <many-to-many class="Interest" column="interest"/>
-    </bag>
+    <many-to-one name="Location" unique="true" column="Location"/>
+
   </class>
 </hibernate-mapping>

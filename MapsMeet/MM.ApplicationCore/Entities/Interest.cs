@@ -8,7 +8,5 @@ namespace MM.ApplicationCore.Entities
     {
         [Required(ErrorMessage = "Name Required")]
         public virtual string Name { get; set; }
-
-        public virtual IList<Users> User { get; set; }
     }
 }
