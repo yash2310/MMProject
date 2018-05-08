@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MM.WebApi.Models
 {
@@ -14,6 +15,7 @@ namespace MM.WebApi.Models
         public string login_type { get; set; }
         public string email { get; set; }
         public string profile_pic { get; set; }
+        public List<MstData> Interests { get; set; }
 
         //public int UserId { get; set; }
         //public string FirstName { get; set; }
@@ -26,5 +28,11 @@ namespace MM.WebApi.Models
         //public string LoginType { get; set; }
         //public DateTime CreatedOn { get; set; }
         //public DateTime UpdatedOn { get; set; }
+    }
+
+    public class MstData
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -4,11 +4,10 @@
     <id name="UserId">
       <generator class="native" />
     </id>
-    <property name="FirstName" not-null="true" />
-    <property name="LastName" />
+    <property name="Username" />
     <property name="Email" />
-    <property name="Gender" not-null="true" />
-    <property name="DOB" not-null="true" />
+    <property name="Gender" />
+    <property name="DOB" />
     <property name="MobileNo" />
     <property name="Token" not-null="true" />
     <property name="LoginType" not-null="true" />
@@ -16,9 +15,12 @@
     <property name="CreatedOn" not-null="true" />
     <property name="UpdatedOn" />
     
-    <bag name="Interests" table="User_Interest" inverse="true" lazy="true">
-      <key column="user"/>
-      <many-to-many class="Interest" column="interest"/>
-    </bag>
+    <many-to-one name="Location" unique="true" column="Location"/>
+
+    <set name="Interests" table="User_Interest" inverse="true" lazy="true">
+      <key column="User_id"/>
+      <many-to-many class="Interest" column="Interests_Id"/>
+    </set>
+    
   </class>
 </hibernate-mapping>

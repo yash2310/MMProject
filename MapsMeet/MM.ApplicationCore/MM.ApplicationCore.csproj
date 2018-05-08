@@ -44,6 +44,7 @@
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Interest.cs" />
     <Compile Include="Entities\Location.cs" />
+    <Compile Include="Entities\UserInterest.cs" />
     <Compile Include="Entities\Users.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

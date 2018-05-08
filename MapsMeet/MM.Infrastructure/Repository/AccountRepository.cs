@@ -54,6 +54,10 @@ namespace MM.Infrastructure.Repository
                 using (_session = MMDatabaseHelper.Create().Session)
                 {
                     users = _session.CreateCriteria<Users>().List<Users>().FirstOrDefault(u => u.Token.Equals(token));
+                    if (users != null)
+                    {
+                        NHibernateUtil.Initialize(users.Interests);
+                    }
                 }
             }
             catch (Exception ex)

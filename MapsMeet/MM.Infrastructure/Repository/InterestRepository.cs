@@ -39,14 +39,17 @@ namespace MM.Infrastructure.Repository
                 {
                     using (_transaction = _session.BeginTransaction())
                     {
-
                         Users users = _session.CreateCriteria<Users>().List<Users>().FirstOrDefault(u => u.UserId.Equals(userId));
                         if (users != null)
                         {
+                            _session.CreateSQLQuery(
+                                    $"Delete From User_Interest Where User_id={userId}")
+                                .ExecuteUpdate();
+
                             foreach (int intr in intrst)
                             {
                                 _session.CreateSQLQuery(
-                                        $"Insert Into UserInterest([User], Interest) Values({userId}, {intr})")
+                                        $"Insert Into User_Interest(User_id, Interests_Id) Values({userId}, {intr})")
                                     .ExecuteUpdate();
                             }
                             _transaction.Commit();
@@ -67,5 +70,25 @@ namespace MM.Infrastructure.Repository
             }
             return status;
         }
+        //public static List<Interest> GetInterestsById(int userId)
+        //{
+        //    bool status;
+        //    try
+        //    {
+        //        using (_session = MMDatabaseHelper.Create().Session)
+        //        {
+        //            using (_transaction = _session.BeginTransaction())
+        //            {
+        //                //Users users = _session.CreateCriteria<Interest>().List<Interest>().FirstOrDefault(u => u..Equals(userId));
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine(ex.Message);
+        //        status = false;
+        //    }
+        //    return status;
+        //}
     }
 }

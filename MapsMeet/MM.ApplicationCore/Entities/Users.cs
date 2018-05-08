@@ -9,20 +9,14 @@ namespace MM.ApplicationCore.Entities
         [Required]
         public virtual int UserId { get; set; }
 
-        [Required(ErrorMessage = "First Name Required")]
-        [StringLength(30, ErrorMessage = "First Name should not be more than 30 character")]
-        public virtual string FirstName { get; set; } // FirstName for User
-
-        [StringLength(30, ErrorMessage = "Last Name should not be more than 30 character")]
-        public virtual string LastName { get; set; } // LastName for User
+        [StringLength(50, ErrorMessage = "Username should not be more than 50 character")]
+        public virtual string Username { get; set; } // FirstName for User
 
         [DataType(DataType.EmailAddress, ErrorMessage = "Invalid Email")]
         public virtual string Email { get; set; }
 
-        [Required(ErrorMessage = "Gender Required")]
         public virtual string Gender { get; set; }
 
-        [Required(ErrorMessage = "Date of Birth Required")]
         public virtual DateTime DOB { get; set; }
 
         public virtual string MobileNo { get; set; }
@@ -41,5 +35,7 @@ namespace MM.ApplicationCore.Entities
         public virtual DateTime? UpdatedOn { get; set; }
 
 		public virtual Location Location { get; set; }
+
+        public virtual ICollection<Interest> Interests { get; set; }
     }
 }

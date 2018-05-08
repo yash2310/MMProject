@@ -1,4 +1,5 @@
-﻿using MM.ApplicationCore.Entities;
+﻿using System.Linq;
+using MM.ApplicationCore.Entities;
 using MM.ApplicationCore.Utilities;
 
 namespace MM.WebApi.Controllers
@@ -124,8 +125,7 @@ namespace MM.WebApi.Controllers
                     Users userInfo = new Users
                     {
                         UserId = 1,
-                        FirstName = user.FirstName,
-                        LastName = user.LastName,
+                        Username = user.Username,
                         Email = user.Email,
                         Gender = user.Gender,
                         DOB = user.DOB,
@@ -148,13 +148,15 @@ namespace MM.WebApi.Controllers
                     usr.status = "success";
                     usr.message = "";
                     usr.user_id = result.Token;
-                    usr.name = result.FirstName + " " + result.LastName;
+                    usr.name = result.Username;
                     usr.dob = result.DOB;
                     usr.gender = result.Gender;
                     usr.mobile = result.MobileNo;
                     usr.login_type = result.LoginType;
                     usr.email = result.Email;
                     usr.profile_pic = result.ImageUrl;
+                    usr.Interests = result.Interests.Select(intr => new MstData {Id = intr.Id, Name = intr.Name})
+                        .ToList();
                 }
             }
             catch (Exception ex)
