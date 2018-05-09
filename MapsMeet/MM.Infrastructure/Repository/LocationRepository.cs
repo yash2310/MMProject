@@ -7,18 +7,18 @@ using System.Collections.Generic;
 
 namespace MM.Infrastructure.Repository
 {
-    public class LocationRepository
-    {
-        private static ISession _session;
+	public class LocationRepository
+	{
+		private static ISession _session;
 		private static ITransaction _transaction;
 
-        public static bool Add(int id, double longitude, double latitude)
-        {
-            bool status = false;
-            try
-            {
-                using (_session = MMDatabaseHelper.Create().Session)
-                {
+		public static bool Add(int id, double longitude, double latitude)
+		{
+			bool status = false;
+			try
+			{
+				using (_session = MMDatabaseHelper.Create().Session)
+				{
 					using (_transaction = _session.BeginTransaction())
 					{
 						Users users = _session.CreateCriteria<Users>().List<Users>()
@@ -53,13 +53,31 @@ namespace MM.Infrastructure.Repository
 						}
 					}
 				}
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                status = false;
-            }
-            return status;
-        }
-    }
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+				status = false;
+			}
+			return status;
+		}
+
+		public static Location GetLocationById(int id)
+		{
+			Location locations = new Location();
+			try
+			{
+				using (_session = MMDatabaseHelper.Create().Session)
+				{
+					locations = _session.CreateCriteria<Location>().List<Location>().FirstOrDefault(l => l.Users.UserId.Equals(id));
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+				locations = null;
+			}
+			return locations;
+		}
+	}
 }

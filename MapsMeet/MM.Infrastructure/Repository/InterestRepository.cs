@@ -70,25 +70,6 @@ namespace MM.Infrastructure.Repository
             }
             return status;
         }
-        //public static List<Interest> GetInterestsById(int userId)
-        //{
-        //    bool status;
-        //    try
-        //    {
-        //        using (_session = MMDatabaseHelper.Create().Session)
-        //        {
-        //            using (_transaction = _session.BeginTransaction())
-        //            {
-        //                //Users users = _session.CreateCriteria<Interest>().List<Interest>().FirstOrDefault(u => u..Equals(userId));
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine(ex.Message);
-        //        status = false;
-        //    }
-        //    return status;
-        //}
+        
     }
 }
