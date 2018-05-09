@@ -1,15 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="MM.ApplicationCore" namespace="MM.ApplicationCore.Entities">
-  <class name="Location">
+  <class name="Interest">
     <id name="Id">
       <generator class="native" />
     </id>
-    <property name="Longitude" not-null="true" />
-    <property name="Latitude" not-null="true" />
-    <property name="CreatedOn" not-null="true" />
+    <property name="Name" not-null="true" />
+    <property name="CreatedOn" />
     <property name="UpdatedOn" />
 
-    <many-to-one name="Users" unique="true" column="Users" lazy="false"/>
-
+    <set name="Users" table="User_Interest" inverse="true" lazy="true">
+      <key column="Interests_Id"/>
+      <many-to-many class="Users" column="User_id"/>
+    </set>
   </class>
 </hibernate-mapping>

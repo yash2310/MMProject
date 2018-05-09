@@ -21,152 +21,72 @@ namespace MM.WebApi.Controllers
     [RoutePrefix("api/security")]
     public class SecurityController : ApiController
     {
-        //[HttpPost]
-        //[Route("authenticate")]
-        //public IHttpActionResult Authenticate([FromBody] LoginRequest login)
-        //{
-        //    IHttpActionResult response;
-        //    var loginResponse = new LoginResponse { };
-        //    try
-        //    {
-        //        //string userName = DecryptStringAES(login.Username).ToLower();
-        //        //string password = DecryptStringAES(login.Password);
+		[HttpPost]
+		[Route("user/add")]
+		public User Add([FromBody] UserData user)
+		{
+			User usr = new User();
+			Users result = new Users();
+			string token = "";
 
-        //        string userName =login.Username.ToLower();
-        //        string password = login.Password;
+			if (user.LoginType.ToLower().Equals("facebook") || user.LoginType.ToLower().Equals("google"))
+			{
+				token = user.Token;
+			}
+			else if (user.LoginType.ToLower().Equals("mobile"))
+			{
+				token = SecurityManager.Encrypt(user.MobileNo);
+			}
 
-        //        HttpResponseMessage responseMsg = new HttpResponseMessage();
+			try
+			{
+				result = AccountRepository<Users>.CheckUser(token);
+				if (result == null)
+				{
+					Users userInfo = new Users
+					{
+						Username = user.Username,
+						Email = user.Email,
+						Gender = user.Gender,
+						DOB = user.DOB,
+						MobileNo = user.MobileNo,
+						Token = token,
+						LoginType = user.LoginType,
+						CreatedOn = DateTime.Now
+					};
+					result = AccountRepository<Users>.AddUser(userInfo);
+				}
 
-        //        // hash and save a password
-        //        string hashedPassword = BCrypt.HashPassword("bluepi@123"); // Should be used at client end to hash the password and send to the api
-
-        //        EmployeeData employee = GetEmployee(userName, password);
-
-        //        // if credentials are valid
-        //        if (employee != null)
-        //        {
-	       //         string token = createToken(userName, employee.Roles.OrderBy(r => r.Id).First().Name);
-        //            employee.token = token;
-
-        //            return Ok<EmployeeData>(employee);
-        //        }
-        //        else
-        //        {
-        //            // if credentials are not valid send unauthorized status code in response
-        //            loginResponse.responseMsg.StatusCode = HttpStatusCode.Unauthorized;
-        //            response = ResponseMessage(loginResponse.responseMsg);
-        //            return response;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        loginResponse.responseMsg.StatusCode = HttpStatusCode.InternalServerError;
-        //        response = ResponseMessage(loginResponse.responseMsg);
-        //        return response;
-        //    }
-        //}
-
-        //[HttpPost]
-        //[Route("reset")]
-        //public bool Reset([FromBody] ResetPassword reset)
-        //{
-        //    bool status = false;
-        //    try
-        //    {
-	       //     int userId = reset.UserId;
-        //        string password = reset.Password;
-
-        //        string hashedPassword = BCrypt.HashPassword(password);
-
-        //        status = AccountRepository.ResetPassword(userId, hashedPassword);
-
-        //        if (status)
-        //        {
-        //            //SendMail.SendAsyncMail(userName);
-        //            Thread email = new Thread(delegate ()
-        //            {
-	       //             SendMail.Send(reset.email);
-        //            });
-
-        //            email.IsBackground = true;
-        //            email.Start();
-        //        }
-
-        //        return status;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return false;
-        //    }
-        //}
-
-        [HttpPost]
-        [Route("user/add")]
-        public User Add([FromBody] Users user)
-        {
-            User usr = new User();
-            Users result = new Users();
-            string token = "";
-
-            if (user.LoginType.Equals("facebook") || user.LoginType.Equals("google"))
-            {
-                token = user.Token;
-            }
-            else if (user.LoginType.Equals("mobile"))
-            {
-                token = SecurityManager.Encrypt(user.MobileNo);
-            }
-
-            try
-            {
-                result = AccountRepository<Users>.CheckUser(token);
-                if (result == null)
-                {
-                    Users userInfo = new Users
-                    {
-                        UserId = 1,
-                        Username = user.Username,
-                        Email = user.Email,
-                        Gender = user.Gender,
-                        DOB = user.DOB,
-                        MobileNo = user.MobileNo,
-                        Token = token,
-                        LoginType = user.LoginType,
-                        CreatedOn = user.CreatedOn,
-                        UpdatedOn = user.UpdatedOn
-                    };
-                    result = AccountRepository<Users>.AddUser(userInfo);
-                }
-
-                if (result == null)
-                {
-                    usr.status = "failed";
-                    usr.message = "Invalid User Info";
-                }
-                else
-                {
-                    usr.status = "success";
-                    usr.message = "";
-                    usr.user_id = result.Token;
-                    usr.name = result.Username;
-                    usr.dob = result.DOB;
-                    usr.gender = result.Gender;
-                    usr.mobile = result.MobileNo;
-                    usr.login_type = result.LoginType;
-                    usr.email = result.Email;
-                    usr.profile_pic = result.ImageUrl;
-                    usr.Interests = result.Interests.Select(intr => new MstData {Id = intr.Id, Name = intr.Name})
-                        .ToList();
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                usr.status = "failed";
-                usr.message = ex.Message;
-            }
-            return usr;
-        }
+				if (result == null)
+				{
+					usr.status = "failed";
+					usr.message = "Invalid User Info";
+				}
+				else
+				{
+					usr.status = "success";
+					usr.message = "";
+					usr.user_id = result.UserId;
+					usr.token = result.Token;
+					usr.name = result.Username;
+					usr.dob = result.DOB;
+					usr.gender = result.Gender;
+					usr.mobile = result.MobileNo;
+					usr.login_type = result.LoginType;
+					usr.email = result.Email;
+					usr.profile_pic = result.ImageUrl;
+					usr.Interests = result.Interests.Select(intr => new MstData { Id = intr.Id, Name = intr.Name })
+						.ToList();
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+				usr.status = "failed";
+				usr.message = ex.Message;
+			}
+			return usr;
+		}
 
         #region  Encrypt Decrypt
 

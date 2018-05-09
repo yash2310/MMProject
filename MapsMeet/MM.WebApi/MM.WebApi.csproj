@@ -66,12 +66,6 @@
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NHibernate, Version=5.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\packages\NHibernate.5.0.3\lib\net461\NHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate.Envers, Version=5.0.3.0, Culture=neutral, PublicKeyToken=e2c5b946037fb7f8, processorArchitecture=MSIL">
-      <HintPath>..\packages\NHibernate.Envers.5.0.3\lib\net461\NHibernate.Envers.dll</HintPath>
-    </Reference>
     <Reference Include="Remotion.Linq, Version=2.1.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
       <HintPath>..\packages\Remotion.Linq.2.1.2\lib\net45\Remotion.Linq.dll</HintPath>
     </Reference>
@@ -222,14 +216,6 @@
     <Compile Include="Models\MasterData.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\DesignationGoalData.cs" />
-    <Compile Include="ViewModels\EmployeeData.cs" />
-    <Compile Include="ViewModels\EmployeeGoalData.cs" />
-    <Compile Include="ViewModels\GoalData.cs" />
-    <Compile Include="ViewModels\ManagerialGoalData.cs" />
-    <Compile Include="ViewModels\OrganizationGoalData.cs" />
-    <Compile Include="ViewModels\ReporteeData.cs" />
-    <Compile Include="ViewModels\ReviewerData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />

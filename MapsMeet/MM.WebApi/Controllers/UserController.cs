@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using MM.Infrastructure.Repository;
+using System;
 using System.Web.Http;
-using MM.Infrastructure.Repository;
 
 namespace MM.WebApi.Controllers
 {
-    public class UserController : ApiController
+	[RoutePrefix("api/user")]
+	public class UserController : ApiController
     {
         /// <param name="location"></param>
         /// <returns></returns>
@@ -18,7 +15,7 @@ namespace MM.WebApi.Controllers
         {
             try
             {
-                return LocationRepository.Add(location.Id, location.longitude, location.latitude);
+                return LocationRepository.Add(location.UserId, location.longitude, location.latitude);
             }
             catch (Exception e)
             {
@@ -30,7 +27,7 @@ namespace MM.WebApi.Controllers
 
     public class UserLocation
     {
-        public int Id { get; set; }
+        public int UserId { get; set; }
         public double longitude { get; set; }
         public double latitude { get; set; }
     }

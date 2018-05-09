@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MM.ApplicationCore.Entities
 {
-    public class BaseEntity
+	public class BaseEntity
     {
         [Required]
         public virtual int Id { get; set; }
