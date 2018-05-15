@@ -75,7 +75,7 @@ namespace MM.WebApi.Controllers
 					usr.login_type = result.LoginType;
 					usr.email = result.Email;
 					usr.profile_pic = result.ImageUrl;
-					usr.Interests = result.Interests.Select(intr => new MstData { Id = intr.Id, Name = intr.Name })
+					usr.Interests = result.Interests == null ? null : result.Interests.Select(intr => new MstData { Id = intr.Id, Name = intr.Name })
 						.ToList();
 				}
 			}
