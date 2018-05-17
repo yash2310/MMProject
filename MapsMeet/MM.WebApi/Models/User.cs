@@ -32,6 +32,25 @@ namespace MM.WebApi.Models
 		public virtual string ImageUrl { get; set; }
 	}
 
+	public class MatchData
+	{
+		public int Id { get; set; }
+		public string Gender { get; set; }
+		public int Area { get; set; }
+		public double Longitude { get; set; }
+		public double Latitude { get; set; }
+	}
+
+	public class MatchedUser
+	{
+		public int UserId { get; set; }
+		public string Name { get; set; }
+		public string Gender { get; set; }
+		public List<MstData> Interests { get; set; }
+		public double Longitude { get; set; }
+		public double Latitude { get; set; }
+	}
+
 	public class MstData
 	{
 		public int Id { get; set; }
