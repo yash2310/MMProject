@@ -32,6 +32,15 @@ namespace MM.WebApi.Models
 		public virtual string ImageUrl { get; set; }
 	}
 
+	public class UserUpdateData
+	{
+		public virtual int UserId { get; set; }
+		public virtual string Name { get; set; }
+		public virtual string Gender { get; set; }
+		public virtual DateTime DOB { get; set; }
+		public virtual string ImageUrl { get; set; }
+	}
+
 	public class MatchData
 	{
 		public int Id { get; set; }

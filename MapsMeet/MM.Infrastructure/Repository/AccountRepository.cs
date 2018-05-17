@@ -44,9 +44,48 @@ namespace MM.Infrastructure.Repository
             }
 
             return users;
-        }
+		}
 
-        public static Users CheckUser(string token)
+		public static Users UpdateUser(Users item)
+		{
+			Users users = new Users();
+			try
+			{
+				using (_session = MMDatabaseHelper.Create().Session)
+				{
+					users = _session.CreateCriteria<Users>().List<Users>().FirstOrDefault(u => u.UserId.Equals(item.UserId));
+
+					if (users != null)
+					{
+						using (var transaction = _session.BeginTransaction())
+						{
+							users.Username = item.Username;
+							users.Gender = item.Gender;
+							users.DOB = item.DOB;
+							users.ImageUrl = item.ImageUrl;
+							NHibernateUtil.Initialize(users.Interests);
+
+							_session.Update(users);
+
+							transaction.Commit();
+						}
+					}
+					else
+					{
+						users = null;
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				string message = ex.Message.ToString();
+				users = null;
+			}
+
+			return users;
+		}
+
+		public static Users CheckUser(string token)
         {
             Users users = null;
             try

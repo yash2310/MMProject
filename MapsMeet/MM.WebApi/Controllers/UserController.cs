@@ -13,6 +13,53 @@ namespace MM.WebApi.Controllers
 		/// <param name="location"></param>
 		/// <returns></returns>
 		[HttpPost]
+		[Route("update")]
+		public User Update(UserUpdateData userData)
+		{
+			User usr = new User();
+			try
+			{
+				Users users = new Users() { UserId = userData.UserId, Username = userData.Name, Gender = userData.Gender, DOB = userData.DOB, ImageUrl = userData.ImageUrl };
+				Users result = AccountRepository<User>.UpdateUser(users);
+
+
+				if (result == null)
+				{
+					usr.status = "failed";
+					usr.message = "Invalid User Info";
+				}
+				else
+				{
+					usr.status = "success";
+					usr.message = "";
+					usr.user_id = result.UserId;
+					usr.token = result.Token;
+					usr.name = result.Username;
+					usr.dob = result.DOB;
+					usr.gender = result.Gender;
+					usr.mobile = result.MobileNo;
+					usr.login_type = result.LoginType;
+					usr.email = result.Email;
+					usr.profile_pic = result.ImageUrl;
+
+					List<MstData> mstDatas = new List<MstData>();
+					foreach (Interest ist in result.Interests)
+					{
+						mstDatas.Add(new MstData { Id = ist.Id, Name = ist.Name });
+					}
+					usr.Interests = mstDatas;
+				}
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+				usr.status = "failed";
+				usr.message = e.Message;
+			}
+			return usr;
+		}
+
+		[HttpPost]
 		[Route("location/add")]
 		public bool AddLocation(UserLocation location)
 		{
