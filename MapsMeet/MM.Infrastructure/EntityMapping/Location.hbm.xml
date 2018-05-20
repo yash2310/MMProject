@@ -6,6 +6,7 @@
     </id>
     <property name="Longitude" not-null="true" />
     <property name="Latitude" not-null="true" />
+    <property name="LoggedIn" not-null="true" />
     <property name="CreatedOn" not-null="true" />
     <property name="UpdatedOn" />
 

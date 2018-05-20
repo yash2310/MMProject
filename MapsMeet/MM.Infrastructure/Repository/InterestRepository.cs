@@ -71,7 +71,7 @@ namespace MM.Infrastructure.Repository
 			return status;
 		}
 
-		public static List<Users> GetInterestMatch(int userId, string Gender, int Area, double Longitude, double Latitude)
+		public static List<Users> GetInterestMatch(int userId)
 		{
 			Users user = null;
 			List<Users> userList = new List<Users>();

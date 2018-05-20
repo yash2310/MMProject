@@ -65,7 +65,7 @@ namespace MM.WebApi.Controllers
 		{
 			try
 			{
-				return LocationRepository.Add(location.UserId, location.longitude, location.latitude);
+				return LocationRepository.Add(location.UserId, location.longitude, location.latitude, location.login);
 			}
 			catch (Exception e)
 			{
@@ -107,12 +107,12 @@ namespace MM.WebApi.Controllers
 			List<MatchedUser> matchedUsers = new List<MatchedUser>();
 			try
 			{
-				List<Users> users = InterestRepository.GetInterestMatch(matchData.Id, matchData.Gender, matchData.Area, matchData.Longitude, matchData.Latitude);
+				List<Users> users = InterestRepository.GetInterestMatch(matchData.Id);
 
 				foreach (var data in users)
 				{
 					List<MstData> mstDatas = new List<MstData>();
-					if (data.Location != null && data.Gender != "")
+					if (data.Location.LoggedIn > 0 && data.Location != null && data.Gender != "")
 					{
 						double distance = Helper.GeoDistance(matchData.Latitude, matchData.Longitude, data.Location.Latitude, data.Location.Longitude, 'K');
 						if (distance <= matchData.Area && (matchData.Gender.ToLower().Equals("all") || matchData.Gender.ToLower().Equals(data.Gender.ToLower())))
@@ -141,5 +141,6 @@ namespace MM.WebApi.Controllers
         public int UserId { get; set; }
         public double longitude { get; set; }
         public double latitude { get; set; }
+        public int login { get; set; }
     }
 }

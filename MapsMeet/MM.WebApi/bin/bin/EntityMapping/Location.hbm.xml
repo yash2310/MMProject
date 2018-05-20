@@ -6,10 +6,11 @@
     </id>
     <property name="Longitude" not-null="true" />
     <property name="Latitude" not-null="true" />
+    <property name="LoggedIn" not-null="true" />
     <property name="CreatedOn" not-null="true" />
     <property name="UpdatedOn" />
-    
-    <one-to-one name="Users" class="Users"/>
+
+    <many-to-one name="Users" unique="true" column="Users" lazy="false"/>
 
   </class>
 </hibernate-mapping>
