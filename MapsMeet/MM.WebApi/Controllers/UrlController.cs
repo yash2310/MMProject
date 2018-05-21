@@ -6,6 +6,7 @@ namespace MM.WebApi.Controllers
     [RoutePrefix("api/service")]
     public class UrlController : ApiController
     {
+        [HttpGet]
         [Route("url")]
         public List<UrlData> ServiceUrl()
         {
