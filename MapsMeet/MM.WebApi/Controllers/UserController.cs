@@ -112,7 +112,7 @@ namespace MM.WebApi.Controllers
 				foreach (var data in users)
 				{
 					List<MstData> mstDatas = new List<MstData>();
-					if (data.Location.LoggedIn > 0 && data.Location != null && data.Gender != "")
+					if (data.Location != null && data.Location.LoggedIn > 0 && data.Gender != "")
 					{
 						double distance = Helper.GeoDistance(matchData.Latitude, matchData.Longitude, data.Location.Latitude, data.Location.Longitude, 'K');
 						if (distance <= matchData.Area && (matchData.Gender.ToLower().Equals("all") || matchData.Gender.ToLower().Equals(data.Gender.ToLower())))
